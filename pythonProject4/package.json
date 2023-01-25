@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "rasa-webchat": "^1.0.1"
+  }
+}
