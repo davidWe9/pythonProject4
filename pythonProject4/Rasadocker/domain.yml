@@ -9,6 +9,10 @@ intents:
   - mood_unhappy
   - bot_challenge
   - bratwurst
+  - ask_weather
+
+actions:
+  - action_ask_weather
 
 responses:
   utter_greet:
