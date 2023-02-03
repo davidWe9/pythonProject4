@@ -29,3 +29,7 @@ stories:
   - intent: deny
   - action: utter_goodbye
 
+- story: weather question
+  steps:
+  - intent: weather_question
+  - action: utter_weather

@@ -10,9 +10,11 @@ intents:
   - bot_challenge
   - bratwurst
   - ask_weather
+  - weather_question
 
 actions:
   - action_ask_weather
+  - utter_weather
 
 responses:
   utter_greet:
@@ -37,6 +39,11 @@ responses:
   utter_bratwurst:
   - text: "Gib mir eine Bratwurst"
 
+  utter_weather:
+  - text: "Please tell me your location or tell me the name of a random city"
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
+

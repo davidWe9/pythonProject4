@@ -95,5 +95,13 @@ nlu:
     - bratwurst
     - Hast du Bratwurst
 
+
+- intent: weather_question
+  examples: |
+    - is it cloudy?
+    - will it rain? 
+    - which degree do we have today?
+    - what will be the highest temperature today?
+    - is it getting cold today?
     
 

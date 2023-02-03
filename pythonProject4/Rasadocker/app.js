@@ -1,4 +1,5 @@
 class Chatbox {
+
     constructor() {
         this.args = {
             openButton: document.querySelector('.chatbox__button'),
@@ -20,7 +21,7 @@ class Chatbox {
         const node = chatBox.querySelector('input');
         node.addEventListener("keyup", ({key}) => {
             if (key === "Enter") {
-                this.onSendButton(chatBox)
+                 this.onSendButton(chatBox)
             }
         })
     }
@@ -37,41 +38,46 @@ class Chatbox {
     }
 
     onSendButton(chatbox) {
+
         var textField = chatbox.querySelector('input');
+
         let text1 = textField.value
         if (text1 === "") {
             return;
         }
 
-        let msg1 = { name: "test_user", message: text1 }
+        let msg1 = { name: "user_uttered", message: text1 }
         this.messages.push(msg1);
 
-        fetch('http://localhost:5005/webhooks/rest/webhook', {
+         fetch('http://localhost:5005/webhooks/rest/webhook', {
             method: 'POST',
             body: JSON.stringify({ message: text1 }),
-            mode: 'no-cors',
             headers: {
               'Content-Type': 'application/json'
-            },
+            }
+          }).then(res =>{
+              return res.json()
           })
-          .then(r => r.json())
-          .then(r => {
-            let msg2 = { name: "Sam", message: r.answer };
-            this.messages.push(msg2);
-            this.updateChatText(chatbox)
-            textField.value = ''
+             .then(data => {
+                 let msg2 = {name: "bot_uttered", message: data[0].text }
+                 this.messages.push(msg2)
+                 console.log(data[0].text)
+                 if(data[0].text === 'Hey! How are you?'){
+                     console.log('Weather')
+                 }
 
-        }).catch((error) => {
-            console.error('Error:', error);
-            this.updateChatText(chatbox)
-            textField.value = ''
-          });
+                 this.updateChatText(chatbox)
+                 textField.value = ''
+             })
+             .catch(error => console.error('Error'))
+
+
     }
 
     updateChatText(chatbox) {
         var html = '';
         this.messages.slice().reverse().forEach(function(item, index) {
-            if (item.name === "Sam")
+            if (item.name === "bot_uttered")
             {
                 html += '<div class="messages__item messages__item--visitor">' + item.message + '</div>'
             }
